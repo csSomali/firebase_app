@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:get/get_state_manager/get_state_manager.dart';
 
-class AuthController {
+class AuthController extends GetxController {
   final FirebaseAuth auth = FirebaseAuth.instance;
 
   Future<String> registration(

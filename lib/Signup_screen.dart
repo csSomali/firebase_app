@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
 import 'package:login_firebase/auth/auth_controller.dart';
 import 'package:login_firebase/login_screen.dart';
 
 // import 'package:firebase_flutter/login_screen.dart';
-
+final AuthController authController=Get.put(AuthController());
 class Signup extends StatefulWidget {
   @override
   State<Signup> createState() => SignupState();
@@ -12,12 +14,17 @@ class Signup extends StatefulWidget {
 late String name;
 late String email;
 late String password;
-final AuthController authController = AuthController();
+
 
 signup()async {
   String res = await authController.registration(name,email, password);
   if (res == 'Succes') {
+    String title = "Alert";
+    Get.defaultDialog(title: "alert",content: Text(res,style: TextStyle(fontSize: 20,color: Colors.green)));
     print(res);
+  }else{
+    String title = "Alert";
+    Get.defaultDialog(title: title,content: Text(res,style: TextStyle(fontSize: 20,color: Colors.red),));
   }
 }
 
