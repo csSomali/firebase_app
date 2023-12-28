@@ -20,8 +20,8 @@ signup()async {
   String res = await authController.registration(name,email, password);
   if (res == 'Succes') {
     String title = "Alert";
-    Get.defaultDialog(title: "alert",content: Text(res,style: TextStyle(fontSize: 20,color: Colors.green)));
-    print(res);
+    Get.defaultDialog(title: title,content: Text(res,style: TextStyle(fontSize: 20,color: Colors.green)));
+
   }else{
     String title = "Alert";
     Get.defaultDialog(title: title,content: Text(res,style: TextStyle(fontSize: 20,color: Colors.red),));
@@ -107,7 +107,7 @@ class SignupState extends State<Signup> {
               ),
               TextButton(
                   onPressed: () {
-                    Get.to(()=>const login());
+                    Get.to(()=> login());
 
                   },
                   child: Text(
