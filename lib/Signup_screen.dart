@@ -7,6 +7,8 @@ import 'package:login_firebase/login_screen.dart';
 // import 'package:firebase_flutter/login_screen.dart';
 final AuthController authController=Get.put(AuthController());
 class Signup extends StatefulWidget {
+  const Signup({super.key});
+
   @override
   State<Signup> createState() => SignupState();
 }
@@ -34,7 +36,7 @@ class SignupState extends State<Signup> {
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-          Center(
+          const Center(
             child: Text(
               "Sign Up",
               style: TextStyle(
@@ -47,7 +49,7 @@ class SignupState extends State<Signup> {
               onChanged: (value) {
                 name = value;
               },
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: ("Name"),
               ),
             ),
@@ -58,24 +60,24 @@ class SignupState extends State<Signup> {
               onChanged: (value) {
                 email = value;
               },
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: ("Email"),
               ),
             ),
           ),
-          Padding(
+         Padding(
             padding: const EdgeInsets.all(12.0),
             child: TextFormField(
               onChanged: (value) {
                 password = value;
               },
               obscureText: true,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: ("Password"),
               ),
             ),
           ),
-          SizedBox(
+         const SizedBox(
             height: 15,
           ),
           InkWell(
@@ -89,7 +91,7 @@ class SignupState extends State<Signup> {
                 color: Colors.red,
                 borderRadius: BorderRadius.circular(12),
               ),
-              child: Center(
+              child: const Center(
                   child: Text(
                 "Sign up",
                 style: TextStyle(color: Colors.white, fontSize: 30),
@@ -98,8 +100,8 @@ class SignupState extends State<Signup> {
           ),
           Row(
             children: [
-              Padding(
-                padding: const EdgeInsets.all(27.0),
+              const Padding (
+                padding: EdgeInsets.all(27.0),
                 child: Text(
                   "already have an account?",
                   style: TextStyle(fontSize: 19),
@@ -110,7 +112,7 @@ class SignupState extends State<Signup> {
                     Get.to(()=> login());
 
                   },
-                  child: Text(
+                  child: const Text(
                     "Login",
                     style: TextStyle(fontSize: 20),
                   ))

@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
 
         home: Scaffold(
     appBar: AppBar(
-    title: Text('SIGN UP AND SIGN IN USER'),
+    title: const Text('SIGN UP AND SIGN IN USER'),
     ),
     body:Signup(),
     ));
