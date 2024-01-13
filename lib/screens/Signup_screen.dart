@@ -1,82 +1,88 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:login_firebase/Signup_screen.dart';
 
+import 'package:login_firebase/auth/auth_controller.dart';
+import 'package:login_firebase/screens/login_screen.dart';
 
-import 'home_screen.dart';
-import 'auth/auth_controller.dart';
-
+// import 'package:firebase_flutter/login_screen.dart';
 final AuthController authController=Get.put(AuthController());
-class login extends StatelessWidget {
+class Signup extends StatefulWidget {
+  const Signup({super.key});
+
+  @override
+  State<Signup> createState() => SignupState();
+}
+
+late String name;
+late String email;
+late String password;
 
 
-  late String email;
-  late String password;
+signup()async {
+  String res = await authController.registration(name,email, password);
+  if (res == 'Succes') {
+    String title = "Alert";
+    Get.defaultDialog(title: title,content: Text(res,style: TextStyle(fontSize: 20,color: Colors.green)));
 
-
-  signIn()async {
-    final res = await authController.signIn(email, password);
-    try {
-
-      if (res == 'success') {
-        Get.to(() => const HomeScreen());
-      } else {
-        String title = "Alert";
-        Get.defaultDialog(title: title,
-            content: Text(
-              res, style: const TextStyle(fontSize: 20, color: Colors.red),));
-      }
-
-    }catch(e){
-      print(e);
-     // AlertDialog(icon: Icon(Icons.sms_failed),title: Text("error+${e}"));
-    }
+  }else{
+    String title = "Alert";
+    Get.defaultDialog(title: title,content: Text(res,style: TextStyle(fontSize: 20,color: Colors.red),));
   }
+}
 
-
+class SignupState extends State<Signup> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-          const Padding(
-            padding: EdgeInsets.all(45.0),
+          const Center(
             child: Text(
-              "Login ",
+              "Sign Up",
               style: TextStyle(
                   fontSize: 40, fontWeight: FontWeight.bold, color: Colors.red),
             ),
           ),
-
           Padding(
             padding: const EdgeInsets.all(12.0),
             child: TextFormField(
-              onChanged: (value){
-                email=value;
+              onChanged: (value) {
+                name = value;
+              },
+              decoration: const InputDecoration(
+                labelText: ("Name"),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: TextFormField(
+              onChanged: (value) {
+                email = value;
               },
               decoration: const InputDecoration(
                 labelText: ("Email"),
               ),
             ),
           ),
-          Padding(
+         Padding(
             padding: const EdgeInsets.all(12.0),
             child: TextFormField(
-              onChanged: (value){
-                password=value;
+              onChanged: (value) {
+                password = value;
               },
+              obscureText: true,
               decoration: const InputDecoration(
                 labelText: ("Password"),
               ),
             ),
           ),
-          const SizedBox(
+         const SizedBox(
             height: 15,
           ),
           InkWell(
-            onTap: (){
-              signIn();
-
+            onTap: () {
+              signup();
             },
             child: Container(
               width: MediaQuery.of(context).size.width - 60,
@@ -87,26 +93,27 @@ class login extends StatelessWidget {
               ),
               child: const Center(
                   child: Text(
-                "Sign in",
+                "Sign up",
                 style: TextStyle(color: Colors.white, fontSize: 30),
               )),
             ),
           ),
           Row(
             children: [
-              const Padding(
+              const Padding (
                 padding: EdgeInsets.all(27.0),
                 child: Text(
-                  "I don't have an account?",
+                  "already have an account?",
                   style: TextStyle(fontSize: 19),
                 ),
               ),
               TextButton(
                   onPressed: () {
-                   Get.back();
+                    Get.to(()=> login());
+
                   },
                   child: const Text(
-                    "Create",
+                    "Login",
                     style: TextStyle(fontSize: 20),
                   ))
             ],
